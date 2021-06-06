@@ -10,8 +10,9 @@ export interface BuildingAttributes {
 module.exports = (sequelize: Sequelize) => {
   class Building extends Model<BuildingAttributes> {
     static associate(models) {
+      console.log(models);
       // this.myAssociation =
-      this.hasMany(models.units);
+      this.hasMany(models.unit);
     }
   }
   Building.init(
@@ -20,6 +21,7 @@ module.exports = (sequelize: Sequelize) => {
         allowNull: false,
         primaryKey: true,
         type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV1,
       },
       name: {
         type: DataTypes.STRING,

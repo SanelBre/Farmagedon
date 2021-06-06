@@ -8,13 +8,14 @@ export interface UnitAttributes {
 }
 
 module.exports = (sequelize: Sequelize) => {
-  class Units extends Model<UnitAttributes> {}
-  Units.init(
+  class Unit extends Model<UnitAttributes> {}
+  Unit.init(
     {
       id: {
         allowNull: false,
         primaryKey: true,
         type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV1,
       },
       name: {
         type: DataTypes.STRING,
@@ -31,8 +32,8 @@ module.exports = (sequelize: Sequelize) => {
     },
     {
       sequelize,
-      modelName: "units",
+      modelName: "unit",
     }
   );
-  return Units;
+  return Unit;
 };
