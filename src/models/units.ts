@@ -1,7 +1,14 @@
-const { Model } = require("sequelize");
+import { Model, Sequelize, DataTypes } from "sequelize";
 
-module.exports = (sequelize, DataTypes) => {
-  class Units extends Model {}
+export interface UnitAttributes {
+  id: number;
+  name: string;
+  health: number;
+  lastFeedAt: Date;
+}
+
+module.exports = (sequelize: Sequelize) => {
+  class Units extends Model<UnitAttributes> {}
   Units.init(
     {
       id: {
@@ -14,9 +21,6 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       health: {
-        type: DataTypes.INTEGER,
-      },
-      hungerAffection: {
         type: DataTypes.INTEGER,
       },
       lastFeedAt: {

@@ -1,9 +1,17 @@
-const { Model } = require("sequelize");
+import { Model, Sequelize, DataTypes } from "sequelize";
 
-module.exports = (sequelize, DataTypes) => {
-  class Building extends Model {
+export interface BuildingAttributes {
+  id: number;
+  name: string;
+  type: string;
+  gaveFoodAt: Date;
+}
+
+module.exports = (sequelize: Sequelize) => {
+  class Building extends Model<BuildingAttributes> {
     static associate(models) {
-      this.myAssociation = this.hasMany(models.units);
+      // this.myAssociation =
+      this.hasMany(models.units);
     }
   }
   Building.init(
