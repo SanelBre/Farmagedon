@@ -8,6 +8,7 @@ createBuilding.post("/building", async (req: Request, res: Response) => {
   const { name, unitName } = req.body;
 
   if (!name) throw new BadRequestError("[name] params is required");
+
   if (!unitName) throw new BadRequestError("[unitName] params is required");
 
   const building = await services.createBuilding({
@@ -16,7 +17,7 @@ createBuilding.post("/building", async (req: Request, res: Response) => {
     type: Math.random().toString(36).substr(2, 6),
   });
 
-  res.send(building);
+  res.status(201).send(building);
 });
 
 export default createBuilding;

@@ -1,10 +1,11 @@
 import { Model, Sequelize, DataTypes } from "sequelize";
 
 export interface UnitAttributes {
-  id: number;
+  id: string;
   name: string;
   health: number;
   lastFeedAt: Date;
+  isAlive: boolean;
 }
 
 module.exports = (sequelize: Sequelize) => {
@@ -28,6 +29,10 @@ module.exports = (sequelize: Sequelize) => {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
         allowNull: false,
+      },
+      isAlive: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
       },
     },
     {

@@ -1,7 +1,7 @@
 import { Model, Sequelize, DataTypes } from "sequelize";
 
 export interface BuildingAttributes {
-  id: number;
+  id: string;
   name: string;
   type: string;
   gaveFoodAt: Date;

@@ -1,17 +1,25 @@
+import { BuildingAttributes } from "../models/Building";
 import db from "../models";
 import { createUnit } from "./createUnit";
 
-export const createBuilding = async ({ name, type, unitName }) => {
-  const building = await db.building.create({
+export const createBuilding = async ({
+  name,
+  type,
+  unitName,
+}: {
+  name: string;
+  type: string;
+  unitName: string;
+}) => {
+  const building: BuildingAttributes = await db.building.create({
     name,
     unitName,
     type,
   });
 
-  console.log("i am in");
-
-  setInterval(() => {
-    console.log("object");
+  const foodDelivery = setInterval(async () => {
+    console.log("food delivery");
+    if (false) clearInterval(foodDelivery);
   }, 60000);
 
   await createUnit({ name: unitName, buildingId: building.id });
