@@ -1,15 +1,16 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
+    "allowJs": false,
     "module": "commonjs",
     "declaration": true,
+    "removeComments": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2017",
+    "sourceMap": true,
     "outDir": "./dist",
-    "strict": true,
-    "noImplicitAny": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "baseUrl": "./",
+    "incremental": true,
+    "resolveJsonModule": true,
     "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true  
   }
 }
