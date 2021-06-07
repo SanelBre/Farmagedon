@@ -17,7 +17,7 @@ export const hungerStrikeUnitById = async (id: string) => {
     { where: { id } }
   );
 
-  console.log(`feed unit with id: ${unit.id}, current health: ${unit.health}`);
-
-  return unit;
+  console.log(
+    `hunger striking unit with id: ${unit.id}, current health: ${unit.health}`
+  );
 };

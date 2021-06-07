@@ -17,6 +17,4 @@ export const feedUnitById = async (id: string, value: number) => {
   );
 
   console.log(`feed unit with id: ${unit.id}, current health: ${unit.health}`);
-
-  return unit;
 };

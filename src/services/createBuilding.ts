@@ -31,5 +31,8 @@ export const createBuilding = async ({
     else clearInterval(foodDelivery);
   }, env.buildingFeedCountdown);
 
-  return building;
+  return {
+    building,
+    unit,
+  };
 };

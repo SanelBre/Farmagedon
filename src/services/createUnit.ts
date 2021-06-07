@@ -19,8 +19,6 @@ export const createUnit = async ({
     buildingId,
   });
 
-  console.log(`unit created, id: ${unit.id}`);
-
   const hungerStrike = setInterval(async () => {
     const u = await getUnitById(unit.id);
     if (u.isAlive) await hungerStrikeUnitById(u.id);

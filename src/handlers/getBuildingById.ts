@@ -11,10 +11,19 @@ getBuilding.get("/building/:id", async (req: Request, res: Response) => {
 
   if (!building) throw new NotFoundError("did not find the required building");
 
+  const units = await services.getAllBuildingUnitsById(building.id);
+
+  const unitsMap = units.map((unit) => ({
+    id: unit.id,
+    unit: unit.health,
+    isAlive: unit.isAlive,
+  }));
+
   res.status(200).send({
     id: building.id,
     name: building.name,
     type: building.type,
+    units: unitsMap,
   });
 });
 
