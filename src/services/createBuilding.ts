@@ -1,9 +1,7 @@
 import { BuildingType } from "../models/Building";
 import db from "../models";
-import env from "../utils/env";
 import { createUnit } from "./createUnit";
-import { getUnitById } from "./getUnit";
-import { feedUnitById } from "./feedUnit";
+import { mangaeFeedUnitIntervalById } from "./feedUnit";
 
 export const createBuilding = async ({
   name,
@@ -22,14 +20,7 @@ export const createBuilding = async ({
 
   const unit = await createUnit({ name: unitName, buildingId: building.id });
 
-  const foodDelivery = setInterval(async () => {
-    const u = await getUnitById(unit.id);
-    const buildingFeedValue =
-      (env.buildingFeedCountdown / env.hungerStrikeCountdown) *
-      env.hungerStrikeVal;
-    if (u.isAlive) await feedUnitById(u.id, buildingFeedValue);
-    else clearInterval(foodDelivery);
-  }, env.buildingFeedCountdown);
+  mangaeFeedUnitIntervalById(unit.id);
 
   return {
     building,

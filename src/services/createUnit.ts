@@ -1,8 +1,6 @@
 import { UnitType } from "../models/Unit";
 import db from "../models";
-import env from "../utils/env";
-import { getUnitById } from "./getUnit";
-import { hungerStrikeUnitById } from "./hungerStrikeUnit";
+import { manageHungerStrikeIntervalById } from "./hungerStrikeUnit";
 
 export const createUnit = async ({
   name,
@@ -19,11 +17,7 @@ export const createUnit = async ({
     buildingId,
   });
 
-  const hungerStrike = setInterval(async () => {
-    const u = await getUnitById(unit.id);
-    if (u.isAlive) await hungerStrikeUnitById(u.id);
-    else clearInterval(hungerStrike);
-  }, env.hungerStrikeCountdown);
+  manageHungerStrikeIntervalById(unit.id);
 
   return unit;
 };

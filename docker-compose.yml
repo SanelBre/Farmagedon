@@ -1,7 +1,7 @@
 version: '3.9'
 
 services:
-  db:
+  database:
     image: postgres
     volumes:
       - ./pg_data:/var/lib/postgresql/data
@@ -10,11 +10,13 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     ports:
-      - '5432:5432'
+      - '3030:5432'
 
   farmagedon:
     image: farmagedon
     depends_on:
-      - db
+      - database
+    environment:
+      PSQL_HOST: database
     ports:
       - '3000:3000'
