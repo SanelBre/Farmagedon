@@ -11,6 +11,9 @@ import {
   getUnitById,
 } from "./handlers";
 import { ErrorCatcher } from "./middlewares/ErrorCatcher";
+import { logGreen } from "./utils/log";
+
+const PORT = process.env.APP_PORT ?? 3000;
 
 const app = express();
 
@@ -30,5 +33,5 @@ app.all("*", async () => {
 app.use(ErrorCatcher);
 
 models.sequelize.sync({ force: true }).then(() => {
-  app.listen(3000, () => console.log("listening on port 3000!!!"));
+  app.listen(PORT, () => logGreen(`listening on port ${PORT}!!!`));
 });

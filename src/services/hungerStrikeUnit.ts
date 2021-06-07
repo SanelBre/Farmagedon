@@ -1,7 +1,8 @@
-import db from "../models";
+import { logRed } from "../utils/log";
 import env from "../utils/env";
 import State from "../utils/statet";
 import { UnitType } from "../models/Unit";
+import db from "../models";
 import { getUnitById } from "./getUnit";
 
 export const hungerStrikeUnitById = async (id: string) => {
@@ -19,10 +20,8 @@ export const hungerStrikeUnitById = async (id: string) => {
     { where: { id } }
   );
 
-  console.log(
-    "\x1b[31m",
-    `hunger striking unit with id: ${unit.id}, current health: ${unit.health}`,
-    "\x1b[37m"
+  logRed(
+    `hunger striking unit with id: ${unit.id}, current health: ${unit.health}`
   );
 };
 

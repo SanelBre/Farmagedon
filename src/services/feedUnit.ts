@@ -1,3 +1,4 @@
+import { logGreen, logYellow } from "../utils/log";
 import State from "../utils/statet";
 import env from "../utils/env";
 import db from "../models";
@@ -20,11 +21,7 @@ export const feedUnitById = async (id: string, value: number) => {
     { where: { id } }
   );
 
-  console.log(
-    "\x1b[32m",
-    `feeding unit with id: ${unit.id}, current health: ${unit.health}`,
-    "\x1b[37m"
-  );
+  logGreen(`feeding unit with id: ${unit.id}, current health: ${unit.health}`);
 };
 
 export const mangaeFeedUnitIntervalById = (unitId: string) => {
@@ -38,9 +35,16 @@ export const mangaeFeedUnitIntervalById = (unitId: string) => {
     if (u.isAlive) {
       await feedUnitById(u.id, buildingFeedValue);
 
+      await db.building.update(
+        {
+          gaveFoodAt: new Date(),
+        },
+        { where: { id: u.buildingId } }
+      );
+
       if (State[u.id]) manageHungerStrikeIntervalById(u.id);
 
-      console.log("\x1b[33m", `farm feeded unit with id: ${u.id}`, "\x1b[37m");
+      logYellow(`farm feeded unit with id: ${u.id}`);
     } else clearInterval(foodDelivery);
   }, env.buildingFeedCountdown);
 };
