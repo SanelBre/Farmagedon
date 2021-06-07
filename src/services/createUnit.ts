@@ -1,6 +1,7 @@
 import { UnitType } from "../models/Unit";
 import db from "../models";
 import { manageHungerStrikeIntervalById } from "./hungerStrikeUnit";
+import { mangaeFeedUnitIntervalById } from "./feedUnit";
 
 export const createUnit = async ({
   name,
@@ -16,6 +17,8 @@ export const createUnit = async ({
     health: randomHealthUponCreation50to100,
     buildingId,
   });
+
+  mangaeFeedUnitIntervalById(unit.id);
 
   manageHungerStrikeIntervalById(unit.id);
 

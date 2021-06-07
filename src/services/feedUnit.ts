@@ -29,8 +29,9 @@ export const mangaeFeedUnitIntervalById = (unitId: string) => {
     const u = await getUnitById(unitId);
 
     const buildingFeedValue =
-      (env.buildingFeedCountdown / env.hungerStrikeCountdown) *
-      env.hungerStrikeVal;
+      ((env.buildingFeedCountdown / env.hungerStrikeCountdown) *
+        env.hungerStrikeVal) /
+      2;
 
     if (u.isAlive) {
       await feedUnitById(u.id, buildingFeedValue);

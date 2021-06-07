@@ -31,7 +31,13 @@ It is required that you have installed docker. Also, a docker image for postgres
 
 ### start the project:
 
-Execute the next command form the root of the project:
+Create an docker image for the project:
+
+```
+docker build -t farmagedon .
+```
+
+To start the project execute the next command form the root of the project:
 
 ```
 docker-compose -f docker-compose.yml up -d
@@ -86,19 +92,21 @@ _PUT_ -> localhost:3000/unit/:id - request params: - id: string _required_ - id 
 _GET_ -> localhost:3000/building - request params:
 / - request body:
 / - response payload: [
+
 - name: string
 - type: string
 - numberOfUnits: number
-]
+  ]
 
 ### Get a building by id
 
 _GET_ -> localhost:3000/building/:id - request params: - id: string _required_ - id of the building - request body:
 / - response payload: - id: string - name: string - type: string - units: [
+
 - id: string
 - unit: number
 - isAlive: boolean
-]
+  ]
 
 ### Get a unit by id
 
