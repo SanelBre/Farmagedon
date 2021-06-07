@@ -1,17 +1,18 @@
 import db from "../models";
+import env from "../utils/env";
 import { UnitType } from "../models/Unit";
 
-export const feedUnitById = async (id: string, value: number) => {
-  const feedValue = Math.abs(value);
+export const hungerStrikeUnitById = async (id: string) => {
+  const value = -env.hungerStrikeVal;
 
   const unit: UnitType = await db.unit.findOne({ where: { id } });
 
-  const newHealth = unit.health + feedValue;
+  const newHealth = unit.health + value;
 
   await db.unit.update(
     {
-      health: newHealth > 100 ? 100 : newHealth,
-      lastFeedAt: new Date(),
+      health: newHealth,
+      isAlive: !(newHealth <= 0),
     },
     { where: { id } }
   );

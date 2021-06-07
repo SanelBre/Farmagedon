@@ -1,6 +1,6 @@
 import { Model, Sequelize, DataTypes } from "sequelize";
 
-export interface BuildingAttributes {
+export interface BuildingType {
   id: string;
   name: string;
   type: string;
@@ -8,10 +8,8 @@ export interface BuildingAttributes {
 }
 
 module.exports = (sequelize: Sequelize) => {
-  class Building extends Model<BuildingAttributes> {
+  class Building extends Model<BuildingType> {
     static associate(models) {
-      console.log(models);
-      // this.myAssociation =
       this.hasMany(models.unit);
     }
   }

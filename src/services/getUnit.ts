@@ -1,8 +1,8 @@
-import { UnitAttributes } from "../models/Unit";
+import { UnitType } from "../models/Unit";
 import db from "../models";
 
 export const getUnitById = async (id: string) => {
-  const unit: UnitAttributes = await db.unit.findOne({
+  const unit: UnitType = await db.unit.findOne({
     where: {
       id,
     },

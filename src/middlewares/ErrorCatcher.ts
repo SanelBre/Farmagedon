@@ -3,7 +3,7 @@ import { CustomError } from "../utils/errors";
 
 export const ErrorCatcher = (
   error: Error,
-  req: Request,
+  _req: Request,
   res: Response,
   next: NextFunction
 ) => {

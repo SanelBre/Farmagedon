@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { NotFoundError } from "../utils/errors";
+import { BadRequestError, NotFoundError } from "../utils/errors";
 import * as services from "../services";
 import env from "../utils/env";
 
@@ -12,23 +12,23 @@ feedUnitById.put("/unit/:id", async (req: Request, res: Response) => {
 
   if (!unit) throw new NotFoundError("unit does not exist");
 
-  const lastFeedAt = new Date(unit.lastFeedAt);
-  const requestToFeedAt = new Date();
+  if (!unit.isAlive) throw new BadRequestError("unit is dead");
 
-  const dif = lastFeedAt.getTime() - requestToFeedAt.getTime();
+  const lastFeedAt = new Date(unit.lastFeedAt).getTime();
+  const requestToFeedAt = new Date().getTime();
 
-  const difInSec = Math.abs(dif / 1000);
+  const dif = requestToFeedAt - lastFeedAt;
 
-  if (difInSec <= 5)
-    res.status(200).send({ message: `can feed in ${5 - difInSec} seconds` });
+  const difInSec = Math.ceil(dif / 1000);
 
-  if (unit.lastFeedAt)
-    services.feedUnitById({
-      id: unit.id,
-      value: env.feedVal,
-    });
+  if (difInSec < env.feedInterval)
+    return res
+      .status(200)
+      .send({ message: `can feed in ${5 - difInSec} seconds` });
 
-  res.status(204).send();
+  await services.feedUnitById(unit.id, env.feedVal);
+
+  return res.status(204).send();
 });
 
 export default feedUnitById;

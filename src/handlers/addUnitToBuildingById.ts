@@ -4,7 +4,7 @@ import * as services from "../services";
 
 const addUnitToBuildingById = express.Router();
 
-addUnitToBuildingById.patch("/building/:id", async (req, res) => {
+addUnitToBuildingById.patch("/building/:id/unit", async (req, res) => {
   const { id } = req.params;
   const { name } = req.body;
 
@@ -20,7 +20,11 @@ addUnitToBuildingById.patch("/building/:id", async (req, res) => {
     buildingId: id,
   });
 
-  res.status(201).send(unit);
+  return res.status(201).send({
+    id: unit.id,
+    health: unit.health,
+    type: buidling.type,
+  });
 });
 
 export default addUnitToBuildingById;

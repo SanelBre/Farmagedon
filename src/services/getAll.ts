@@ -1,17 +1,17 @@
-import { UnitAttributes } from "../models/Unit";
-import { BuildingAttributes } from "../models/Building";
+import { UnitType } from "../models/Unit";
+import { BuildingType } from "../models/Building";
 import db from "../models";
 
 export const getAllBuildings = async () => {
-  const buildings: BuildingAttributes[] = await db.building.findAll();
+  const buildings: BuildingType[] = await db.building.findAll();
 
   return buildings ?? [];
 };
 
-export const getAllBuildingUnits = async ({ id }: { id: string }) => {
-  const buildings: UnitAttributes[] = await db.unit.findAll({
+export const getAllBuildingUnitsById = async (id: string) => {
+  const buildings: UnitType[] = await db.unit.findAll({
     where: {
-      id,
+      buildingId: id,
     },
   });
 

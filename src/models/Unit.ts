@@ -1,11 +1,15 @@
 import { Model, Sequelize, DataTypes } from "sequelize";
 
-export interface UnitAttributes {
+interface UnitAttributes {
   id: string;
   name: string;
   health: number;
   lastFeedAt: Date;
   isAlive: boolean;
+}
+
+export interface UnitType extends UnitAttributes {
+  buildingId: string;
 }
 
 module.exports = (sequelize: Sequelize) => {
